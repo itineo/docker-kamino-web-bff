@@ -2,7 +2,7 @@ FROM node:alpine
 
 ENV GRAPHQL_PORT=4000
 ENV REST_API_PORT=3000
-ENV NPM_TASK = "serve"
+ENV NPM_TASK = "start"
 
 
 RUN mkdir bff
