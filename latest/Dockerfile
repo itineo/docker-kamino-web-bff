@@ -1,15 +1,17 @@
 FROM node:alpine
 
-RUN mkdir /kamino-web-bff
+ENV GRAPHQL_PORT=4000
+ENV REST_API_PORT=3000
+ENV NPM_TASK = "serve"
 
-ADD . kamino-web-bff/ 
 
-WORKDIR  kamino-web-bff 
-
+RUN mkdir bff
+ADD . bff/
+WORKDIR bff 
 RUN node -v && yarn -v
-
 RUN yarn install
 
-EXPOSE 4000
+EXPOSE $GRAPHQL_PORT
+EXPOSE $REST_API_PORT
 
-CMD npm run serve
+CMD npm run $NPM_TASK
