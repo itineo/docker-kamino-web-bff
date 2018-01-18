@@ -1,17 +1,8 @@
-FROM node:alpine
-
-ENV GRAPHQL_PORT=4000
-ENV REST_API_PORT=3000
-ENV NPM_TASK = "start"
-
-
-RUN mkdir bff
-ADD . bff/
-WORKDIR bff 
-RUN node -v && yarn -v
-RUN yarn install
-
-EXPOSE $GRAPHQL_PORT
-EXPOSE $REST_API_PORT
-
-CMD npm run $NPM_TASK
+FROM node:8.9.4-alpine
+RUN apk add --update curl bash \
+  && rm -rf /var/cache/apk/* \
+  && curl -L https://download.docker.com/linux/static/stable/x86_64/docker-17.03.0-ce.tgz > /docker.tgz && \
+    cd / && \
+    tar -xvzf /docker.tgz && \
+    mv /docker/* /usr/local/bin && \
+    rm /docker.tgz
